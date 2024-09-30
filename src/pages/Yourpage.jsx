@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Row, Col, Card } from 'react-bootstrap';
 import { addRecipe, deleteRecipe, updateRecipe } from '../redux/slice/recipeSlice';
+import './Yourpage.css'; // Add a CSS file for additional styling
 
 function Yourpage() {
   const [show, setShow] = useState(false);
@@ -74,41 +75,45 @@ function Yourpage() {
 
   return (
     <>
-      <div className='bg-dark '>
-        <div className='p-5 bg-dark d-flex justify-content-center  '>
-          <button className='btn d-flex justify-content-between row mt-5' onClick={handleShow}>
-            <div className='col w-75 d-flex justify-content-center bg-danger p-3 me-5' style={{ borderRadius: "20px" }}>
+      <div className='bg-dark container-fluid'>
+        <div className='p-5 bg-dark d-flex justify-content-center'>
+          <button className='btn add-recipe-btn mt-5' onClick={handleShow}>
+            <div className='recipe-button-content'>
               <h3>Add Your Recipes</h3>
             </div>
           </button>
         </div>
 
-        <div className='p-5 border border-danger' style={{ borderRadius: "20px" }}>
-          {recipes.map((recipe, index) => (
-            <Card key={index} style={{ width: '25rem' }}>
-              <Card.Img variant="top" src={recipe.image || "https://via.placeholder.com/150"} /> {/* Display selected image or a placeholder */}
-              <Card.Body>
-                <Card.Title>{recipe.recipeName}</Card.Title>
-                <Card.Text>
-                  <label>Ingredients: </label> {recipe.ingredients}
-                </Card.Text>
-                <Card.Text>{recipe.instructions}</Card.Text>
-                <div className='d-flex justify-content-center p-4'>
-                  <button className='btn' onClick={() => handleDeleteRecipe(index)}>
-                    <i className="fa-solid fa-trash fa-xl me-3" style={{ color: "#e61405" }} />
-                  </button>
-                  <button className='btn' onClick={() => handleEditRecipe(index)}>
-                    <i className="fa-solid fa-pen-to-square fa-xl" style={{ color: "#FFD43B" }} />
-                  </button>
-                </div>
-              </Card.Body>
-            </Card>
-          ))}
+        <div className='recipe-container p-5'>
+          <Row>
+            {recipes.map((recipe, index) => (
+              <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                <Card className="recipe-card">
+                  <Card.Img variant="top" src={recipe.image || "https://via.placeholder.com/150"} />
+                  <Card.Body>
+                    <Card.Title>{recipe.recipeName}</Card.Title>
+                    <Card.Text>
+                      <label>Ingredients: </label> {recipe.ingredients}
+                    </Card.Text>
+                    <Card.Text>{recipe.instructions}</Card.Text>
+                    <div className='d-flex justify-content-center p-4'>
+                      <button className='btn action-btn' onClick={() => handleDeleteRecipe(index)}>
+                        <i className="fa-solid fa-trash fa-xl me-3 delete-icon" />
+                      </button>
+                      <button className='btn action-btn' onClick={() => handleEditRecipe(index)}>
+                        <i className="fa-solid fa-pen-to-square fa-xl edit-icon" />
+                      </button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
         </div>
 
         {/* Modal for Adding/Editing a Recipe */}
-        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-          <Modal.Header closeButton>
+        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
+          <Modal.Header closeButton className='modal-header-custom'>
             <Modal.Title>{editIndex === null ? 'Add Recipe' : 'Edit Recipe'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -118,9 +123,8 @@ function Yourpage() {
                   <input type="file" onChange={handleImageChange} style={{ display: "none" }} />
                   <img
                     src={image || "https://via.placeholder.com/150"}
-                    className='img-fluid'
-                    alt=""
-                    style={{ cursor: "pointer" }}
+                    className='img-fluid recipe-image-preview'
+                    alt="Recipe"
                     onClick={() => document.querySelector('input[type="file"]').click()}
                   />
                 </label>

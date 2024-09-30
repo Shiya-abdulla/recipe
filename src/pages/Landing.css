@@ -1,29 +1,71 @@
+/* Landing Page Styles */
+
 .landing-container {
-    background-image: url('https://img.freepik.com/premium-photo/book-with-picture-vegetables-book-titled-vegan_956920-229506.jpg?w=826');
-    background-size: cover;
-    background-position: center;
-    height: 60vh; /* Adjust height as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    color: white; /* Change text color for better visibility */
+  position: relative;
+  height: 90vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-btn {
+  font-size: 1.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  background-color: #FFD700;
+  border: none;
+  color: #000;
+}
+
+.landing-btn:hover {
+  background-color: #FFA500;
+  color: #fff;
+}
+
+.recipe-card {
+  width: 100%; /* Responsive */
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.recipe-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recipe-card ul li {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 576px) {
+  .landing-btn {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
   }
-  
-  .landing-overlay {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay for better contrast */
-    padding: 20px;
-    border-radius: 10px; /* Optional: Rounded corners */
+
+  .recipe-card {
+    width: 90%; /* Full width on mobile */
+    margin: 0 auto;
   }
-  
-  .stylish-text {
-    font-size: 2rem; /* Adjust size as needed */
-    font-weight: bold;
-    margin-bottom: 15px; /* Space between text and button */
-  }
-  
-  .btn {
-    font-size: 1.2rem; /* Adjust button size as needed */
-  }
-  
+}
